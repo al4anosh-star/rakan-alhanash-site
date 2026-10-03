@@ -8,6 +8,7 @@ const Biography = lazy(() => import('./pages/Biography'))
 const Gallery = lazy(() => import('./pages/Gallery'))
 const Achievements = lazy(() => import('./pages/Achievements'))
 const Requests = lazy(() => import('./pages/Requests'))
+const Parliament = lazy(() => import('./pages/Parliament'))
 const Completed = lazy(() => import('./pages/Completed'))
 const Contact = lazy(() => import('./pages/Contact'))
 const News = lazy(() => import('./pages/News').then((m) => ({ default: m.News })))
@@ -32,6 +33,7 @@ export default function App() {
           <Route path="gallery" element={<Gallery />} />
           <Route path="achievements" element={<Achievements />} />
           <Route path="requests" element={<Requests />} />
+          <Route path="parliament" element={<Parliament />} />
           <Route path="completed" element={<Completed />} />
           <Route path="contact" element={<Contact />} />
         </Route>

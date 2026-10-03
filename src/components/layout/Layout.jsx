@@ -5,7 +5,7 @@ import { SocialIcon, socialLabels, Icon } from '../ui/icons'
 import { asset } from '../../lib/utils'
 
 const links = [
-  ['/', 'الرئيسية'], ['/biography', 'السيرة الذاتية'], ['/news', 'الأخبار'],
+  ['/', 'الرئيسية'], ['/biography', 'السيرة الذاتية'], ['/parliament', 'العمل النيابي'], ['/news', 'الأخبار'],
   ['/gallery', 'المعرض'], ['/achievements', 'الإنجازات'], ['/requests', 'طلبات المواطنين'], ['/completed', 'المعاملات المنجزة'], ['/contact', 'تواصل معنا'],
 ]
 
@@ -31,16 +31,16 @@ export default function Layout() {
       <header className="sticky top-0 z-50 bg-white/95 backdrop-blur border-b border-black/5 shadow-sm">
         <div className="container-x flex items-center justify-between h-16">
           <Brand />
-          <nav className="hidden lg:flex items-center gap-1">
+          <nav className="hidden xl:flex items-center gap-1">
             {links.map(([to, label]) => (
               <NavLink key={to} to={to} end={to === '/'} className={({ isActive }) =>
                 `px-3 py-2 rounded-md text-sm font-bold transition ${isActive ? 'text-gold-600 bg-gold-500/10' : 'text-navy-900 hover:text-gold-600'}`}>{label}</NavLink>
             ))}
           </nav>
-          <button className="lg:hidden size-10 text-2xl text-navy-900" onClick={() => setOpen(!open)} aria-label="القائمة"><Icon name={open ? 'close' : 'menu'} className="size-6 mx-auto" /></button>
+          <button className="xl:hidden size-10 text-2xl text-navy-900" onClick={() => setOpen(!open)} aria-label="القائمة"><Icon name={open ? 'close' : 'menu'} className="size-6 mx-auto" /></button>
         </div>
         {open && (
-          <nav className="lg:hidden border-t bg-white fade-in">
+          <nav className="xl:hidden border-t bg-white fade-in">
             {links.map(([to, label]) => (
               <NavLink key={to} to={to} end={to === '/'} className={({ isActive }) =>
                 `block px-6 py-3.5 border-b border-black/5 font-bold ${isActive ? 'text-gold-600 bg-gold-500/10' : 'text-navy-900'}`}>{label}</NavLink>
