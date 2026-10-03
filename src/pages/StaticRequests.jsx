@@ -72,6 +72,8 @@ export default function StaticRequests() {
             <b className="text-navy-900">أوقات دوام المكتب</b>
             <p className="text-slate-600 mt-1">{site.officeHours}</p>
             <p className="text-slate-600 mt-1">{site.address}</p>
+            <p className="text-slate-600 mt-3"><b className="text-navy-900">واتساب المكتب:</b> <span dir="ltr">{site.phone}</span></p>
+            <p className="text-slate-600 mt-3"><b className="text-navy-900">الشكاوى والبلاغات المتعلقة بـ:</b> {site.complaintAreas.join('، ')}. تُستقبل بسرية وشفافية، ويُتخذ ما يلزم وفق القانون.</p>
             <a href={site.social.telegram} target="_blank" rel="noreferrer" className="block mt-3 text-gold-600 font-bold">قناة المكتب الرسمية على تلغرام</a>
           </div>
         </aside>
