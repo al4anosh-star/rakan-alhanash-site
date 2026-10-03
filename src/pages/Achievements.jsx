@@ -1,6 +1,6 @@
 import { getList } from '../lib/api'
 import { asset } from '../lib/utils'
-import { PageHeader, Loader, Empty, useAsync } from '../components/ui'
+import { PageHeader, Loader, Empty, Cover, useAsync } from '../components/ui'
 
 export default function Achievements() {
   const { data, loading } = useAsync(() => getList('achievements'))
@@ -12,7 +12,7 @@ export default function Achievements() {
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {data.map((a) => (
               <div key={a.id} className="bg-white rounded-xl overflow-hidden shadow-sm border border-black/5">
-                <div className="aspect-[16/10] bg-navy-800">{a.image_url && <img src={asset(a.image_url)} alt={a.title} loading="lazy" className="size-full object-cover" />}</div>
+                <Cover src={a.image_url} alt={a.title} />
                 <div className="p-5">
                   <div className="flex gap-2 text-xs mb-2">
                     {a.category && <span className="bg-navy-900 text-white px-2.5 py-1 rounded-full">{a.category}</span>}

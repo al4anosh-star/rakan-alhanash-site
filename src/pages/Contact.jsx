@@ -17,7 +17,7 @@ export default function Contact() {
             </div>
           ))}
         </div>
-        <div className="bg-navy-900 rounded-xl p-6 text-white">
+        <div className="bg-navy-900 rounded-xl p-6 text-white self-start">
           <h3 className="font-extrabold text-lg mb-4">الحسابات الرسمية</h3>
           <div className="grid grid-cols-2 gap-3">
             {Object.entries(site.social).map(([k, v]) => (

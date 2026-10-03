@@ -38,7 +38,7 @@ export async function getSettings() {
 export async function getNews({ limit, category } = {}) {
   if (isLocal) return http('GET', '/api/news?' + new URLSearchParams({ ...(limit ? { limit } : {}), ...(category ? { category } : {}) }))
   if (!isConfigured) {
-    let r = demo.news
+    let r = [...demo.news].sort((x, y) => (y.published_at || '').localeCompare(x.published_at || ''))
     if (category) r = r.filter((n) => n.category === category)
     return limit ? r.slice(0, limit) : r
   }

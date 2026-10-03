@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import { Icon } from './icons'
+import { site } from '../../config/site'
 import { asset, fmtDate, youtubeEmbed, isDirectVideo } from '../../lib/utils'
 
 export function SectionTitle({ title, subtitle, light }) {
@@ -46,12 +47,19 @@ export function Empty({ text = 'لا توجد بيانات حالياً' }) {
   return <p className="text-center text-slate-500 py-16">{text}</p>
 }
 
+export function Cover({ src, alt = '', className = 'aspect-[16/10]' }) {
+  return (
+    <div className={`${src ? className : 'h-20'} bg-navy-800 overflow-hidden`}>
+      {src ? <img src={asset(src)} alt={alt} loading="lazy" className="size-full object-cover group-hover:scale-105 transition duration-500" />
+        : <div className="size-full bg-gradient-to-l from-navy-900 to-navy-700 flex items-center justify-center border-b-2 border-gold-500"><img src={asset(site.logo)} alt="" className="size-12 opacity-90" /></div>}
+    </div>
+  )
+}
+
 export function NewsCard({ n }) {
   return (
     <Link to={`/news/${n.id}`} className="group bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition border border-black/5 flex flex-col">
-      <div className="aspect-[16/10] bg-navy-800 overflow-hidden">
-        {n.image_url && <img src={asset(n.image_url)} alt={n.title} loading="lazy" className="size-full object-cover group-hover:scale-105 transition duration-500" />}
-      </div>
+      <Cover src={n.image_url} alt={n.title} />
       <div className="p-5 flex-1 flex flex-col">
         <div className="flex items-center gap-3 text-xs mb-2">
           {n.category && <span className="bg-gold-500/15 text-gold-600 font-bold px-2.5 py-1 rounded-full">{n.category}</span>}
@@ -71,7 +79,7 @@ export function Timeline({ items }) {
       {items.map((t) => (
         <li key={t.id} className="ps-8 relative">
           <span className="absolute -start-[1.15rem] top-0 size-9 rounded-full bg-navy-900 flex items-center justify-center ring-4 ring-paper"><Icon name={icon[t.kind] || 'shield'} className="size-4 text-gold-300" /></span>
-          <span className="text-gold-600 font-bold text-sm">{t.year}</span>
+          {t.year && <span className="text-gold-600 font-bold text-sm">{t.year}</span>}
           <h3 className="font-bold text-lg text-navy-900">{t.title}</h3>
           {t.description && <p className="text-slate-600 mt-1">{t.description}</p>}
         </li>
