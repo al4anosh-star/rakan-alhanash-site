@@ -21,7 +21,8 @@ export default function Home() {
         <div className="container-x relative grid md:grid-cols-2 gap-10 items-center py-14 md:py-24">
           <div className="fade-in order-2 md:order-1">
             <span className="inline-block border border-gold-500 text-gold-300 rounded-full px-4 py-1 text-sm mb-5">{site.title}</span>
-            <h1 className="text-4xl md:text-6xl font-extrabold leading-tight">{site.fullName}</h1>
+            <h1 className="sr-only">{site.fullName}</h1>
+            <img src={asset(site.nameImageWhite)} alt="" aria-hidden="true" className="w-full max-w-xl h-auto" />
             <p className="mt-4 text-xl text-gold-300 font-display">{site.slogan}</p>
             <div className="mt-8 flex flex-wrap gap-3">
               <Button as={Link} to="/requests">تقديم طلب أو شكوى</Button>

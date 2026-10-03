@@ -3,14 +3,14 @@
 @theme {
   --font-sans: "Tajawal", system-ui, sans-serif;
   --font-display: "Cairo", "Tajawal", sans-serif;
-  --color-navy-950: #071428;
-  --color-navy-900: #0c1d36;
-  --color-navy-800: #12294d;
-  --color-navy-700: #1b3a6b;
-  --color-gold-300: #d4bd7d;
-  --color-gold-500: #b08d3c;
-  --color-gold-600: #8a6d27;
-  --color-paper: #f4f3ef;
+  --color-navy-950: #020f24;
+  --color-navy-900: #071c39;
+  --color-navy-800: #0e2a52;
+  --color-navy-700: #1a3d70;
+  --color-gold-300: #dcc383;
+  --color-gold-500: #b98b2b;
+  --color-gold-600: #94701f;
+  --color-paper: #fbfaf6;
 }
 
 html { scroll-behavior: smooth; }

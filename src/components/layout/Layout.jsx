@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react'
 import { Link, NavLink, Outlet, useLocation } from 'react-router-dom'
 import { site } from '../../config/site'
-import { SocialIcon, socialLabels, Icon } from '../ui/icons'
+import { SocialIcon, socialLabels } from '../ui/icons'
+import { asset } from '../../lib/utils'
 
 const links = [
   ['/', 'الرئيسية'], ['/biography', 'السيرة الذاتية'], ['/news', 'الأخبار'],
@@ -10,12 +11,11 @@ const links = [
 
 function Brand({ light }) {
   return (
-    <Link to="/" className="flex items-center gap-3">
-      {site.logo ? <img src={site.logo} alt="" className="size-10" /> :
-        <span className="size-10 rounded-full bg-gold-500 text-navy-950 flex items-center justify-center"><Icon name="shield" className="size-6" /></span>}
+    <Link to="/" className="flex items-center gap-3" aria-label={site.fullName}>
+      <img src={asset(site.logo)} alt="" className="size-11 shrink-0" />
       <span className="leading-tight">
-        <b className={`block font-display text-lg ${light ? 'text-white' : 'text-navy-900'}`}>{site.fullName}</b>
-        <span className={`text-xs ${light ? 'text-white/60' : 'text-slate-500'}`}>{site.title}</span>
+        <img src={asset(light ? site.nameImageWhite : site.nameImage)} alt={site.fullName} className="h-8 w-auto max-w-[190px]" />
+        <span className={`block text-[11px] mt-0.5 ${light ? 'text-white/60' : 'text-slate-500'}`}>{site.title}</span>
       </span>
     </Link>
   )
@@ -56,6 +56,7 @@ export default function Layout() {
           <div>
             <Brand light />
             <p className="mt-4 text-sm leading-relaxed">{site.slogan}</p>
+            <div className="mt-4 inline-block bg-white rounded-lg p-2"><img src={asset(site.committeeLogo)} alt="شعار لجنة النزاهة النيابية" className="h-14 w-auto" /></div>
           </div>
           <div>
             <h4 className="font-bold text-white mb-3">روابط سريعة</h4>
