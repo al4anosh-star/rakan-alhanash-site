@@ -47,7 +47,7 @@ export default function Home() {
 
       {stats.length > 0 && (
         <section className="bg-navy-900 py-14">
-          <div className="container-x grid grid-cols-2 md:grid-cols-4 gap-6">
+          <div className="container-x flex flex-wrap justify-center gap-x-16 gap-y-8">
             {stats.map((s, i) => (
               <div key={i} className="text-center">
                 <div className="text-4xl md:text-5xl font-extrabold text-gold-500 font-display">{fmtNum(s.value)}</div>
