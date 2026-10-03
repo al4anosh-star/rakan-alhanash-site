@@ -11,6 +11,8 @@ export const site = {
   phone: '',
   email: '',
   address: 'شارع الببسي - الموصل - محافظة نينوى',
+  // قنوات استلام الطلبات (للاستضافة الثابتة): أرقام بصيغة دولية بدون + مثل 9647701234567، ومعرّف تلغرام بدون @
+  requestChannels: { whatsapp: '', telegramUser: '' },
   officeHours: 'يومياً من الساعة 4:00 عصراً حتى 9:00 مساءً',
   social: {
     facebook: 'https://www.facebook.com/rakanalhansh/',

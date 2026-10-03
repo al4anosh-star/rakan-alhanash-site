@@ -11,7 +11,12 @@ function Field({ label, children }) {
   return <label className="block"><span className="block mb-1.5 font-bold text-navy-900 text-sm">{label}</span>{children}</label>
 }
 
-export default function Requests() {
+import StaticRequests from './StaticRequests'
+import { isStatic } from '../lib/supabase'
+
+export default function Requests() { return isStatic ? <StaticRequests /> : <ServerRequests /> }
+
+function ServerRequests() {
   const [f, setF] = useState(empty)
   const [file, setFile] = useState(null)
   const [busy, setBusy] = useState(false)

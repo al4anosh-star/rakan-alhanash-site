@@ -18,6 +18,8 @@ const M = (name) => lazy(() => import('./admin/Managers').then((m) => ({ default
 const RequestsManager = M('RequestsManager'), NewsManager = M('NewsManager'), GalleryManager = M('GalleryManager'),
   AchievementsManager = M('AchievementsManager'), CompletedManager = M('CompletedManager'), ReportsManager = M('ReportsManager'), TimelineManager = M('TimelineManager'), SettingsManager = M('SettingsManager')
 
+import { isStatic } from './lib/supabase'
+
 export default function App() {
   return (
     <Suspense fallback={<Loader />}>
@@ -33,8 +35,8 @@ export default function App() {
           <Route path="completed" element={<Completed />} />
           <Route path="contact" element={<Contact />} />
         </Route>
-        <Route path="admin/login" element={<AdminLogin />} />
-        <Route path="admin" element={<AdminLayout />}>
+        {!isStatic && <Route path="admin/login" element={<AdminLogin />} />}
+        {!isStatic && <Route path="admin" element={<AdminLayout />}>
           <Route index element={<Navigate to="requests" replace />} />
           <Route path="requests" element={<RequestsManager />} />
           <Route path="news" element={<NewsManager />} />
@@ -44,7 +46,7 @@ export default function App() {
           <Route path="achievements" element={<AchievementsManager />} />
           <Route path="timeline" element={<TimelineManager />} />
           <Route path="settings" element={<SettingsManager />} />
-        </Route>
+        </Route>}
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </Suspense>

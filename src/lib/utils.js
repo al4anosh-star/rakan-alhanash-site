@@ -1,3 +1,6 @@
+// يضيف مسار الموقع الأساسي (مهم عند الاستضافة داخل مجلد مثل GitHub Pages)
+export const asset = (p) => (p && p.startsWith('/') && !p.startsWith('//') ? import.meta.env.BASE_URL.replace(/\/$/, '') + p : p)
+
 export const fmtDate = (d) =>
   d ? new Date(d).toLocaleDateString('ar-IQ', { year: 'numeric', month: 'long', day: 'numeric' }) : ''
 

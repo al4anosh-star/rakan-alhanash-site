@@ -1,4 +1,5 @@
 import { Icon } from '../components/ui/icons'
+import { asset } from '../lib/utils'
 import { site } from '../config/site'
 import { getList, getSettings } from '../lib/api'
 import { PageHeader, Timeline, Loader, useAsync, SectionTitle } from '../components/ui'
@@ -18,7 +19,7 @@ export default function Biography() {
         <aside className="md:col-span-1">
           <div className="sticky top-24 bg-white rounded-xl p-6 shadow-sm border border-black/5 text-center">
             <div className="size-40 mx-auto rounded-full overflow-hidden bg-navy-800 flex items-center justify-center">
-              {site.photo ? <img src={site.photo} alt="" className="size-full object-cover" /> : <Icon name="user" className="size-20 text-gold-500/70" />}
+              {site.photo ? <img src={asset(site.photo)} alt="" className="size-full object-cover" /> : <Icon name="user" className="size-20 text-gold-500/70" />}
             </div>
             <h2 className="mt-4 font-extrabold text-xl text-navy-900">{site.fullName}</h2>
             <p className="text-gold-600 font-bold">{site.title}</p>

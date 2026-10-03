@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { getNews, getNewsItem } from '../lib/api'
 import { newsCategories } from '../config/site'
-import { fmtDate } from '../lib/utils'
+import { fmtDate, asset } from '../lib/utils'
 import { PageHeader, NewsCard, Loader, Empty, useAsync, Button } from '../components/ui'
 
 export function News() {
@@ -37,7 +37,7 @@ export function NewsDetail() {
       <div className="flex gap-3 text-sm text-slate-500 mt-3">
         {n.category && <span className="text-gold-600 font-bold">{n.category}</span>}<span>{fmtDate(n.published_at)}</span>
       </div>
-      {n.image_url && <img src={n.image_url} alt={n.title} className="w-full rounded-xl mt-6 shadow" />}
+      {n.image_url && <img src={asset(n.image_url)} alt={n.title} className="w-full rounded-xl mt-6 shadow" />}
       <div className="mt-6 text-lg leading-loose text-slate-700 whitespace-pre-line">{n.content || n.summary}</div>
       <Button as={Link} to="/news" variant="navy" className="mt-8">كل الأخبار</Button>
     </article>

@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom'
 import { Icon } from '../components/ui/icons'
 import { site } from '../config/site'
 import { getNews, getSettings, getRequestStats } from '../lib/api'
-import { fmtNum } from '../lib/utils'
+import { fmtNum, asset } from '../lib/utils'
 import { Button, SectionTitle, NewsCard, Loader, useAsync } from '../components/ui'
 
 export default function Home() {
@@ -32,7 +32,7 @@ export default function Home() {
             <div className="relative">
               <div className="absolute -inset-3 rounded-full border-2 border-gold-500/60" />
               <div className="size-64 md:size-96 rounded-full overflow-hidden bg-navy-700 flex items-center justify-center ring-8 ring-white/5">
-                {site.photo ? <img src={site.photo} alt={site.fullName} className="size-full object-cover" /> : <Icon name="user" className="size-32 text-gold-500/70" />}
+                {site.photo ? <img src={asset(site.photo)} alt={site.fullName} className="size-full object-cover" /> : <Icon name="user" className="size-32 text-gold-500/70" />}
               </div>
             </div>
           </div>

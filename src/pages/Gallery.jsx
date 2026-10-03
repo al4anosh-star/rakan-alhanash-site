@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { getList } from '../lib/api'
+import { asset } from '../lib/utils'
 import { PageHeader, Loader, Empty, Lightbox, VideoEmbed, useAsync } from '../components/ui'
 
 export default function Gallery() {
@@ -19,8 +20,8 @@ export default function Gallery() {
         {loading ? <Loader /> : !items.length ? <Empty /> : tab === 'image' ? (
           <div className="columns-2 md:columns-3 gap-4 [&>*]:mb-4">
             {items.map((i) => (
-              <button key={i.id} onClick={() => setBox(i.url)} className="block w-full overflow-hidden rounded-lg group">
-                <img src={i.url} alt={i.title || ''} loading="lazy" className="w-full group-hover:scale-105 transition duration-500" />
+              <button key={i.id} onClick={() => setBox(asset(i.url))} className="block w-full overflow-hidden rounded-lg group">
+                <img src={asset(i.url)} alt={i.title || ''} loading="lazy" className="w-full group-hover:scale-105 transition duration-500" />
               </button>
             ))}
           </div>

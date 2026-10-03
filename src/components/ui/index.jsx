@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import { Icon } from './icons'
-import { fmtDate, youtubeEmbed, isDirectVideo } from '../../lib/utils'
+import { asset, fmtDate, youtubeEmbed, isDirectVideo } from '../../lib/utils'
 
 export function SectionTitle({ title, subtitle, light }) {
   return (
@@ -50,7 +50,7 @@ export function NewsCard({ n }) {
   return (
     <Link to={`/news/${n.id}`} className="group bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition border border-black/5 flex flex-col">
       <div className="aspect-[16/10] bg-navy-800 overflow-hidden">
-        {n.image_url && <img src={n.image_url} alt={n.title} loading="lazy" className="size-full object-cover group-hover:scale-105 transition duration-500" />}
+        {n.image_url && <img src={asset(n.image_url)} alt={n.title} loading="lazy" className="size-full object-cover group-hover:scale-105 transition duration-500" />}
       </div>
       <div className="p-5 flex-1 flex flex-col">
         <div className="flex items-center gap-3 text-xs mb-2">
