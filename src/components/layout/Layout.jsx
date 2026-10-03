@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { Link, NavLink, Outlet, useLocation } from 'react-router-dom'
 import { site } from '../../config/site'
-import { SocialIcon, socialLabels } from '../ui/icons'
+import { SocialIcon, socialLabels, Icon } from '../ui/icons'
 import { asset } from '../../lib/utils'
 
 const links = [
