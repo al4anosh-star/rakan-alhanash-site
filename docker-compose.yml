@@ -1,0 +1,25 @@
+# تشغيل الموقع + HTTPS تلقائي. الاستخدام:  DOMAIN=example.iq docker compose up -d --build
+services:
+  app:
+    build: .
+    restart: unless-stopped
+    environment:
+      - ADMIN_PASSWORD=${ADMIN_PASSWORD:-}
+      - TELEGRAM_BOT_TOKEN=${TELEGRAM_BOT_TOKEN:-}
+      - TELEGRAM_CHAT_ID=${TELEGRAM_CHAT_ID:-}
+    volumes:
+      - appdata:/app/server/data
+    expose: ["8787"]
+  caddy:
+    image: caddy:2-alpine
+    restart: unless-stopped
+    ports: ["80:80", "443:443"]
+    environment:
+      - DOMAIN=${DOMAIN:?ضع اسم النطاق في DOMAIN}
+    command: caddy reverse-proxy --from ${DOMAIN} --to app:8787
+    volumes:
+      - caddydata:/data
+    depends_on: [app]
+volumes:
+  appdata:
+  caddydata:
