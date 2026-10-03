@@ -6,7 +6,8 @@ import { fmtNum, asset } from '../lib/utils'
 import { Button, SectionTitle, NewsCard, Loader, useAsync } from '../components/ui'
 
 export default function Home() {
-  const news = useAsync(() => getNews({ limit: 3 }))
+  // أحدث 3 أخبار مصوّرة (أخبار الوجبات بدون صور تبقى في صفحة الأخبار)
+  const news = useAsync(() => getNews({ limit: 12 }).then((r) => r.filter((n) => n.image_url).slice(0, 3)))
   const settings = useAsync(getSettings)
   const live = useAsync(getRequestStats)
   const liveStats = live.data && Number(live.data.total) > 0
