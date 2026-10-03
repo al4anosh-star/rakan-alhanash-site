@@ -79,9 +79,7 @@ export default function Layout() {
           © {new Date().getFullYear()} {site.fullName} — جميع الحقوق محفوظة
           <div className="mt-3 flex flex-col items-center gap-1">
             <span className="text-gold-300 font-bold text-sm">صنع في العراق</span>
-            <span dir="ltr" className="text-white/60 tracking-wide">
-              Designed &amp; Built by <span className="text-gold-300 font-semibold">Mohammed Alsaadoon</span>
-            </span>
+            <span className="text-white/60">{site.designer.label}: <span className="text-gold-300 font-semibold">{site.designer.name}</span></span>
           </div>
         </div>
       </footer>
