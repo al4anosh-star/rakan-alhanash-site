@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://al4anosh-star.github.io/rakan-alhanash-site/sitemap.xml

@@ -28,13 +28,14 @@ export default function Layout() {
 
   return (
     <div className="min-h-screen flex flex-col">
+      <a href="#main" className="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:right-2 focus:z-[200] focus:bg-gold-500 focus:text-navy-950 focus:px-4 focus:py-2 focus:rounded">تخطّي إلى المحتوى</a>
       <header className="sticky top-0 z-50 bg-white/95 backdrop-blur border-b border-black/5 shadow-sm">
         <div className="container-x flex items-center justify-between h-16">
           <Brand />
           <nav className="hidden xl:flex items-center gap-1">
             {links.map(([to, label]) => (
               <NavLink key={to} to={to} end={to === '/'} className={({ isActive }) =>
-                `px-3 py-2 rounded-md text-sm font-bold transition ${isActive ? 'text-gold-600 bg-gold-500/10' : 'text-navy-900 hover:text-gold-600'}`}>{label}</NavLink>
+                `px-2.5 py-2 rounded-md text-sm font-bold whitespace-nowrap transition ${isActive ? 'text-gold-600 bg-gold-500/10' : 'text-navy-900 hover:text-gold-600'}`}>{label}</NavLink>
             ))}
           </nav>
           <button className="xl:hidden size-10 text-2xl text-navy-900" onClick={() => setOpen(!open)} aria-label="القائمة"><Icon name={open ? 'close' : 'menu'} className="size-6 mx-auto" /></button>
@@ -49,7 +50,8 @@ export default function Layout() {
         )}
       </header>
 
-      <main className="flex-1"><Outlet /></main>
+      <main id="main" className="flex-1"><Outlet /></main>
+      <a href={site.social.whatsapp} target="_blank" rel="noreferrer" aria-label="راسلنا على واتساب" className="fixed bottom-5 left-5 z-40 size-14 rounded-full bg-[#25D366] text-white shadow-lg flex items-center justify-center hover:scale-105 transition"><SocialIcon name="whatsapp" className="size-8" /></a>
 
       <footer className="bg-navy-950 text-white/80 mt-16">
         <div className="container-x py-12 grid gap-8 md:grid-cols-3">
@@ -66,8 +68,8 @@ export default function Layout() {
           </div>
           <div>
             <h4 className="font-bold text-white mb-3">تواصل معنا</h4>
-            <p className="text-sm" dir="ltr" style={{ textAlign: 'right' }}>{site.phone}</p>
-            <p className="text-sm mt-1">{site.email}</p>
+            <a href={`tel:${site.phone}`} className="block text-sm hover:text-gold-300" dir="ltr" style={{ textAlign: 'right' }}>{site.phone}</a>
+            <a href={`mailto:${site.email}`} className="block text-sm mt-1 hover:text-gold-300">{site.email}</a>
             <div className="flex gap-2 mt-4">
               {Object.entries(site.social).map(([k, v]) => (
                 <a key={k} href={v} target="_blank" rel="noreferrer" aria-label={socialLabels[k]} className="size-9 rounded-full bg-white/10 hover:bg-gold-500 hover:text-navy-950 flex items-center justify-center transition"><SocialIcon name={k} className="size-4" /></a>

@@ -31,15 +31,18 @@ export function NewsDetail() {
   if (loading) return <Loader />
   if (!n) return <Empty text="الخبر غير موجود" />
   return (
-    <article className="container-x py-10 max-w-3xl">
+    <article className="container-x py-10"><div className="max-w-3xl mx-auto">
       <Link to="/news" className="text-gold-600 font-bold">العودة إلى الأخبار</Link>
       <h1 className="text-3xl md:text-4xl font-extrabold text-navy-900 mt-4 leading-snug">{n.title}</h1>
       <div className="flex gap-3 text-sm text-slate-500 mt-3">
         {n.category && <span className="text-gold-600 font-bold">{n.category}</span>}<span>{fmtDate(n.published_at)}</span>
       </div>
-      {n.image_url && <img src={asset(n.image_url)} alt={n.title} className="w-full rounded-xl mt-6 shadow" />}
+      {n.image_url && <img src={asset(n.image_url)} alt={n.title} className="w-full max-h-[520px] object-cover rounded-xl mt-6 shadow" />}
       <div className="mt-6 text-lg leading-loose text-slate-700 whitespace-pre-line">{n.content || n.summary}</div>
-      <Button as={Link} to="/news" variant="navy" className="mt-8">كل الأخبار</Button>
-    </article>
+      <div className="flex flex-wrap gap-3 mt-8">
+        <Button as="a" href={`https://wa.me/?text=${encodeURIComponent(n.title + '\n' + window.location.href)}`} target="_blank" rel="noreferrer" variant="navy">مشاركة عبر واتساب</Button>
+        <Button as={Link} to="/news" variant="ghost">كل الأخبار</Button>
+      </div>
+    </div></article>
   )
 }
