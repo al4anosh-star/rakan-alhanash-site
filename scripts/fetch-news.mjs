@@ -38,7 +38,7 @@ for (const m of html.matchAll(/\{"node":\{"__typename":"XIGPolaris/g)) {
   } catch {}
 }
 console.log('posts parsed:', posts.length)
-if (!posts.length) { console.log('لم يُعثر على منشورات (قد تكون الصفحة محجوبة).'); process.exit(0) }
+if (!posts.length) { console.error(`تعذّر جلب المنشورات (HTTP ${res.status}). انستغرام يحجب خوادم GitHub؛ شغّل السكربت من جهازك: npm run news`); process.exit(1) }
 
 const fresh = posts.filter((p) => !known.has(String(p.pk)))
 console.log('new posts:', fresh.length)

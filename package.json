@@ -9,7 +9,8 @@
     "preview": "vite preview",
     "seed": "node scripts/make-seed.mjs",
     "start": "npm run build && node server/index.js",
-    "server": "node server/index.js"
+    "server": "node server/index.js",
+    "news": "node scripts/fetch-news.mjs"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.117.2",
