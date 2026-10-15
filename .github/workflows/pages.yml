@@ -16,7 +16,7 @@ jobs:
         env:
           VITE_BASE: /${{ github.event.repository.name }}/
       - run: cp dist/index.html dist/404.html   # دعم الروابط المباشرة للصفحات
-      - uses: actions/upload-pages-artifact@v3
+      - uses: actions/upload-pages-artifact@v5
         with: { path: dist }
   deploy:
     needs: build
