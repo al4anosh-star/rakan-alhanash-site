@@ -1,0 +1,35 @@
+name: Auto news drafts
+# كل يوم اثنين (وعند الطلب): يفحص منشورات المكتب العلنية ويفتح طلب دمج بالأخبار الجديدة للمراجعة.
+# لا يُنشر شيء على الموقع إلا بعد موافقة المراجع ودمج الطلب.
+on:
+  schedule: [{ cron: '0 5 * * 1' }]
+  workflow_dispatch:
+permissions: { contents: write, pull-requests: write }
+concurrency: { group: auto-news, cancel-in-progress: false }
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with: { node-version: 22 }
+      - name: Fetch new posts
+        run: node scripts/fetch-news.mjs | tee fetch.log
+      - name: Open review PR
+        env: { GH_TOKEN: '${{ secrets.GITHUB_TOKEN }}' }
+        run: |
+          if git diff --quiet -- src/data public/img/news && [ -z "$(git ls-files --others --exclude-standard src/data public/img/news)" ]; then
+            echo "لا أخبار جديدة."; exit 0
+          fi
+          BR="auto-news-$(date +%Y%m%d-%H%M)"
+          git config user.name "news-bot"; git config user.email "news-bot@users.noreply.github.com"
+          git checkout -b "$BR"
+          git add src/data public/img/news
+          git commit -m "أخبار جديدة من صفحة المكتب للمراجعة"
+          git push origin "$BR"
+          {
+            echo "أخبار جديدة التُقطت من المنشورات العلنية للمكتب. **راجع العناوين والنصوص والصور قبل الدمج؛ الدمج = نشر على الموقع.**"
+            echo; echo '```'; grep '^+' fetch.log; echo '```'
+            echo; echo "للتعديل: افتح الملف src/data/news-auto.js في هذا الطلب وعدّل العنوان أو النص، أو احذف الخبر غير المناسب."
+          } > body.md
+          gh pr create --base main --head "$BR" --title "أخبار جديدة للمراجعة ($(date +%F))" --body-file body.md

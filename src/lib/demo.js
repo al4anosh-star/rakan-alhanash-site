@@ -1,4 +1,6 @@
 // بيانات تجريبية تظهر عند عدم ربط Supabase — للمعاينة فقط
+import autoNews from '../data/news-auto.js'
+
 const img = (n) => `https://picsum.photos/seed/${n}/800/500`
 
 export const demo = {
@@ -83,3 +85,7 @@ export const demo = {
     { id: 't6', year: 'الدورة النيابية الحالية', title: 'عضو لجنة النزاهة النيابية', description: 'اختاره مجلس النواب عضواً في لجنة النزاهة النيابية.', kind: 'position' },
   ],
 }
+
+// أخبار مُضافة تلقائياً بعد مراجعة المكتب
+demo.news.unshift(...autoNews.news)
+demo.gallery.push(...autoNews.gallery)
