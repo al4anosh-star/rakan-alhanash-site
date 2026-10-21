@@ -117,6 +117,14 @@ export async function submitRequest(form, file) {
 }
 
 export async function trackRequest(code) {
+  if (!isConfigured && !isLocal) {
+    // استضافة ثابتة: ملف حالات عام يحوي أرقام المرجع فقط (بدون أي بيانات شخصية)
+    const r = await fetch(`${import.meta.env.BASE_URL}status.json?t=${Date.now()}`)
+    if (!r.ok) return null
+    const all = await r.json()
+    const hit = all[String(code).trim().toUpperCase()]
+    return hit ? { tracking_code: String(code).trim().toUpperCase(), status: hit.status, type: hit.type || '', created_at: hit.updated, note: hit.note || '' } : null
+  }
   if (isLocal) return http('GET', '/api/track?code=' + encodeURIComponent(code))
   if (!isConfigured) return { tracking_code: code.toUpperCase(), status: 'in_progress', type: 'طلب خدمة', created_at: new Date().toISOString() }
   const { data, error } = await supabase.rpc('track_request', { code })

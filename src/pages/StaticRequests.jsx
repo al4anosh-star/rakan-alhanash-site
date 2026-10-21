@@ -1,5 +1,7 @@
 import { useState } from 'react'
-import { site, provinces, requestTypes } from '../config/site'
+import { site, provinces, requestTypes, requestStatuses } from '../config/site'
+import { trackRequest } from '../lib/api'
+import { fmtDate } from '../lib/utils'
 import { Icon } from '../components/ui/icons'
 import { PageHeader, Button } from '../components/ui'
 
@@ -18,6 +20,9 @@ export default function StaticRequests() {
   const [copied, setCopied] = useState(false)
   const set = (k) => (e) => setF({ ...f, [k]: e.target.value })
   const ch = site.requestChannels || {}
+  const [q, setQ] = useState('')
+  const [tracked, setTracked] = useState(undefined)
+  const track = async (e) => { e.preventDefault(); try { setTracked(await trackRequest(q)) } catch { setTracked(null) } }
 
   function submit(e) {
     e.preventDefault(); setErr('')
@@ -39,7 +44,7 @@ export default function StaticRequests() {
             <div className="bg-white rounded-xl p-6 md:p-8 shadow border-t-4 border-gold-500 fade-in">
               <div className="mx-auto size-14 rounded-full bg-gold-500/15 text-gold-600 flex items-center justify-center"><Icon name="check" className="size-8" /></div>
               <h2 className="text-2xl font-extrabold text-navy-900 mt-3 text-center">الطلب جاهز للإرسال</h2>
-              <p className="text-slate-600 mt-2 text-center">لم يُرسَل الطلب بعد. يرجى إرسال النص التالي إلى مكتب النائب عبر إحدى الوسائل أدناه، واحتفظوا برقم المرجع:</p>
+              <p className="text-slate-600 mt-2 text-center">لم يُرسَل الطلب بعد. يرجى إرسال النص التالي إلى مكتب النائب عبر إحدى الوسائل أدناه، واحتفظوا برقم المرجع، فبه يمكنكم الاستعلام عن حالة الطلب في هذه الصفحة بعد أن يسجّل المكتب متابعته:</p>
               <div className="my-4 text-center"><span className="inline-block bg-navy-900 text-gold-300 text-xl font-extrabold tracking-wider px-6 py-3 rounded-lg" dir="ltr">{out.ref}</span></div>
               <pre className="bg-slate-50 border rounded-lg p-4 text-sm whitespace-pre-wrap font-sans leading-relaxed">{out.text}</pre>
               <div className="flex flex-wrap gap-3 justify-center mt-5">
@@ -67,7 +72,21 @@ export default function StaticRequests() {
             </form>
           )}
         </div>
-        <aside>
+        <aside className="space-y-4">
+          <form onSubmit={track} className="bg-navy-900 text-white rounded-xl p-6">
+            <h3 className="font-extrabold text-lg">الاستعلام عن حالة طلب</h3>
+            <p className="text-white/70 text-sm mt-1 mb-4">أدخل رقم المرجع الذي استلمته</p>
+            <input required dir="ltr" placeholder="AG-2026-XXXXX" className="input text-center !text-navy-900" value={q} onChange={(e) => setQ(e.target.value)} />
+            <Button type="submit" className="w-full mt-3">بحث</Button>
+            {tracked === null && <p className="mt-4 text-amber-200 text-sm leading-relaxed">لم تُسجَّل حالة لهذا الرقم بعد. إن كنت أرسلت الطلب مؤخراً فقد لم يُدرَج لدى المكتب، يرجى التواصل عبر واتساب المكتب مع ذكر الرقم.</p>}
+            {tracked && (
+              <div className="mt-4 bg-white/10 rounded-lg p-4 text-sm space-y-1">
+                <p>الحالة: <span className={`px-2 py-0.5 rounded-full font-bold ${requestStatuses[tracked.status]?.color}`}>{requestStatuses[tracked.status]?.label}</span></p>
+                {tracked.created_at && <p>آخر تحديث: <b>{fmtDate(tracked.created_at)}</b></p>}
+                {tracked.note && <p>ملاحظة: {tracked.note}</p>}
+              </div>
+            )}
+          </form>
           <div className="bg-white rounded-xl p-5 border border-black/5 text-sm leading-relaxed">
             <b className="text-navy-900">أوقات دوام المكتب</b>
             <p className="text-slate-600 mt-1">{site.officeHours}</p>

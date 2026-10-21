@@ -30,3 +30,10 @@ npm run news        # يجلب المنشورات الجديدة (من جهاز�
 git diff            # راجع العناوين والنصوص والصور في src/data/news-auto.js و public/img/news
 git add -A && git commit -m "أخبار جديدة" && git push   # الدفع = النشر على الموقع
 ```
+
+## تحديث حالة طلب (للمكتب)
+```
+npm run status -- AG-2026-XXXXX in_progress "ملاحظة اختيارية"   # الحالات: new | in_progress | done
+git add -A && git commit -m "تحديث حالة" && git push                  # يظهر للمواطن خلال دقيقة
+```
+الملف `public/status.json` يحوي أرقام المرجع فقط (بدون أسماء أو هواتف).

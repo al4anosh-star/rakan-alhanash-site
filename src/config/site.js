@@ -11,13 +11,11 @@ export const site = {
   nameImage: '/img/brand/name-blue.png',   // الاسم المزخرف بالخط الديواني/الثلث
   nameImageWhite: '/img/brand/name-white.png',
   committeeLogo: '/img/brand/committee.png',    // رابط الشعار
-  // مؤقتاً: بيانات المصمم للتجربة. للإرجاع إلى بيانات المكتب الرسمية:
-  //   phone: '07779006161' | email: 'rakanalhansh313@gmail.com' | whatsapp: '9647779006161'
-  phone: '07827444008',
-  email: 'info@alsaadon.com',
+  phone: '07779006161',
+  email: 'rakanalhansh313@gmail.com',
   address: 'الموصل - الجانب الأيسر - حي الوحدة - شارع البيبسي - مقابل بنزينخانة السيادة',
   // قنوات استلام الطلبات (للاستضافة الثابتة): أرقام بصيغة دولية بدون + مثل 9647701234567، ومعرّف تلغرام بدون @
-  requestChannels: { whatsapp: '9647827444008', telegramUser: '' },
+  requestChannels: { whatsapp: '9647779006161', telegramUser: '' },
   // الشكاوى والبلاغات التي يستقبلها المكتب بصفته عضواً في لجنة النزاهة (من إعلان المكتب الرسمي)
   complaintAreas: ['الفساد الإداري', 'الرشوة', 'الابتزاز', 'استغلال المناصب', 'تأخير معاملات المواطنين', 'هدر المال العام'],
   designer: { name: 'محمد سعدون الحنوش', label: 'تصميم وبناء' },
@@ -25,7 +23,7 @@ export const site = {
   social: {
     facebook: 'https://www.facebook.com/rakanalhansh/',
     instagram: 'https://www.instagram.com/rakan__alhanash/',
-    whatsapp: 'https://wa.me/9647827444008',
+    whatsapp: 'https://wa.me/9647779006161',
     telegram: 'https://t.me/rakanalhanash1',
     x: 'https://x.com/rakanalhanash',
   },
