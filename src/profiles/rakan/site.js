@@ -12,8 +12,10 @@ export const site = {
   nameImageWhite: '/img/brand/name-white.png',
   committeeLogo: '/img/brand/committee.png',    // رابط الشعار
   features: { parliament: true },
-  phone: '07779006161',
-  email: 'rakanalhansh313@gmail.com',
+  // بيانات التواصل المعروضة حالياً هي بيانات المصمم. للإرجاع إلى بيانات المكتب الرسمية:
+  //   phone: '07779006161' | email: 'rakanalhansh313@gmail.com' | whatsapp: '9647827444008'
+  phone: '07827444008',
+  email: 'info@alsaadon.com',
   address: 'الموصل - الجانب الأيسر - حي الوحدة - شارع البيبسي - مقابل بنزينخانة السيادة',
   // قنوات استلام الطلبات (للاستضافة الثابتة): أرقام بصيغة دولية بدون + مثل 9647701234567، ومعرّف تلغرام بدون @
   requestChannels: { whatsapp: '9647779006161', telegramUser: '' },
@@ -24,7 +26,7 @@ export const site = {
   social: {
     facebook: 'https://www.facebook.com/rakanalhansh/',
     instagram: 'https://www.instagram.com/rakan__alhanash/',
-    whatsapp: 'https://wa.me/9647779006161',
+    whatsapp: 'https://wa.me/9647827444008',
     telegram: 'https://t.me/rakanalhanash1',
     x: 'https://x.com/rakanalhanash',
   },
