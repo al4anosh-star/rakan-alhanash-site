@@ -49,7 +49,7 @@ export default function Completed() {
         )}
         <p className="mt-10 text-sm text-slate-600 bg-gold-500/10 rounded-lg p-4 leading-relaxed">
           يرجى من أصحاب المعاملات المنجزة مراجعة مقر المكتب لاستلام معاملاتهم خلال أوقات الدوام الرسمي: {site.officeHours}.
-          تُنشر الأسماء والوثائق التفصيلية على <a href={site.social.telegram} target="_blank" rel="noreferrer" className="text-gold-600 font-bold">القناة الرسمية في تلغرام</a>.
+          {site.social.telegram && <>تُنشر الأسماء والوثائق التفصيلية على <a href={site.social.telegram} target="_blank" rel="noreferrer" className="text-gold-600 font-bold">القناة الرسمية في تلغرام</a>.</>}
         </p>
       </div>
     </>

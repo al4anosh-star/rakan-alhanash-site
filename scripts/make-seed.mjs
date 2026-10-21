@@ -1,7 +1,7 @@
 // يولّد supabase/seed.sql من البيانات الموجودة في src/lib/demo.js و src/config/site.js
 import { writeFileSync } from 'node:fs'
-import { demo } from '../src/lib/demo.js'
-import { site } from '../src/config/site.js'
+import { demo } from '../src/profiles/rakan/demo.js'
+import { site } from '../src/profiles/rakan/site.js'
 
 const q = (v) => (v === null || v === undefined || v === '' ? 'null' : `'${String(v).replace(/'/g, "''")}'`)
 const out = ['-- بيانات أولية للموقع (مولّدة تلقائياً) — شغّلها بعد schema.sql', 'begin;']

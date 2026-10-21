@@ -102,7 +102,7 @@ function ServerRequests() {
           <div className="mt-4 bg-white rounded-xl p-5 border border-black/5 text-sm leading-relaxed">
             <b className="text-navy-900">أوقات دوام المكتب</b>
             <p className="text-slate-600 mt-1">{site.officeHours}</p>
-            <a href={site.social.telegram} target="_blank" rel="noreferrer" className="block mt-3 text-gold-600 font-bold">قناة المكتب الرسمية على تلغرام</a>
+            {site.social.telegram && <a href={site.social.telegram} target="_blank" rel="noreferrer" className="block mt-3 text-gold-600 font-bold">قناة المكتب الرسمية على تلغرام</a>}
           </div>
         </aside>
       </div>

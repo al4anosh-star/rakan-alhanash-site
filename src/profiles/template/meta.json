@@ -1,0 +1,11 @@
+{
+  "title": "محمد سعدون الحنوش — نموذج موقع شخصية عامة",
+  "description": "نموذج للعرض: موقع رسمي لشخصية عامة بتصميم احترافي، تصميم وبناء محمد سعدون الحنوش",
+  "ogDescription": "نموذج للعرض: أخبار، سيرة ذاتية، معرض، إنجازات، وبوابة طلبات المواطنين. تصميم وبناء محمد سعدون الحنوش.",
+  "siteName": "نموذج موقع شخصية عامة",
+  "url": "https://al4anosh-star.github.io/public-figure-site-demo/",
+  "ogImage": "https://al4anosh-star.github.io/public-figure-site-demo/img/sample-1.jpg",
+  "themeColor": "#071c39",
+  "robots": "noindex, nofollow",
+  "jsonld": { "@context": "https://schema.org", "@type": "WebSite", "name": "نموذج موقع شخصية عامة", "url": "https://al4anosh-star.github.io/public-figure-site-demo/" }
+}

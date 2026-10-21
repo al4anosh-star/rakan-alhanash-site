@@ -4,17 +4,20 @@ import { site } from '../../config/site'
 import { SocialIcon, socialLabels, Icon } from '../ui/icons'
 import { asset } from '../../lib/utils'
 
-const links = [
+const allLinks = [
   ['/', 'الرئيسية'], ['/biography', 'السيرة الذاتية'], ['/parliament', 'العمل النيابي'], ['/news', 'الأخبار'],
   ['/gallery', 'المعرض'], ['/achievements', 'الإنجازات'], ['/requests', 'طلبات المواطنين'], ['/completed', 'المعاملات المنجزة'], ['/contact', 'تواصل معنا'],
 ]
+const links = allLinks.filter(([to]) => to !== '/parliament' || site.features?.parliament)
 
 function Brand({ light }) {
+  const img = light ? site.nameImageWhite : site.nameImage
   return (
     <Link to="/" className="flex items-center gap-3" aria-label={site.fullName}>
       <img src={asset(site.logo)} alt="" className="size-11 shrink-0" />
       <span className="leading-tight">
-        <img src={asset(light ? site.nameImageWhite : site.nameImage)} alt={site.fullName} className="h-8 w-auto max-w-[190px]" />
+        {img ? <img src={asset(img)} alt={site.fullName} className="h-8 w-auto max-w-[190px]" />
+          : <b className={`block font-display text-lg ${light ? 'text-white' : 'text-navy-900'}`}>{site.fullName}</b>}
         <span className={`block text-[11px] mt-0.5 ${light ? 'text-white/60' : 'text-slate-500'}`}>{site.title}</span>
       </span>
     </Link>
@@ -28,6 +31,7 @@ export default function Layout() {
 
   return (
     <div className="min-h-screen flex flex-col">
+      {site.demoBanner && <div className="bg-gold-500 text-navy-950 text-center text-sm font-bold py-1.5 px-3">{site.demoBanner}</div>}
       <a href="#main" className="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:right-2 focus:z-[200] focus:bg-gold-500 focus:text-navy-950 focus:px-4 focus:py-2 focus:rounded">تخطّي إلى المحتوى</a>
       <header className="sticky top-0 z-50 bg-white/95 backdrop-blur border-b border-black/5 shadow-sm">
         <div className="container-x flex items-center justify-between h-16">
@@ -58,7 +62,7 @@ export default function Layout() {
           <div>
             <Brand light />
             <p className="mt-4 text-sm leading-relaxed">{site.slogan}</p>
-            <div className="mt-4 inline-block bg-white rounded-lg p-2"><img src={asset(site.committeeLogo)} alt="شعار لجنة النزاهة النيابية" className="h-14 w-auto" /></div>
+            {site.committeeLogo && <div className="mt-4 inline-block bg-white rounded-lg p-2"><img src={asset(site.committeeLogo)} alt="شعار لجنة النزاهة النيابية" className="h-14 w-auto" /></div>}
           </div>
           <div>
             <h4 className="font-bold text-white mb-3">روابط سريعة</h4>

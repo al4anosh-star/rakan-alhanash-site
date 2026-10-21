@@ -20,6 +20,7 @@ const RequestsManager = M('RequestsManager'), NewsManager = M('NewsManager'), Ga
   AchievementsManager = M('AchievementsManager'), CompletedManager = M('CompletedManager'), ReportsManager = M('ReportsManager'), TimelineManager = M('TimelineManager'), SettingsManager = M('SettingsManager')
 
 import { isStatic } from './lib/supabase'
+import { site } from './config/site'
 
 export default function App() {
   return (
@@ -33,7 +34,7 @@ export default function App() {
           <Route path="gallery" element={<Gallery />} />
           <Route path="achievements" element={<Achievements />} />
           <Route path="requests" element={<Requests />} />
-          <Route path="parliament" element={<Parliament />} />
+          {site.features?.parliament && <Route path="parliament" element={<Parliament />} />}
           <Route path="completed" element={<Completed />} />
           <Route path="contact" element={<Contact />} />
         </Route>

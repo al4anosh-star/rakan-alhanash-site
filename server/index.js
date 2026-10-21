@@ -51,8 +51,8 @@ const ORDER = { news: 'published_at desc, created_at desc', gallery: 'created_at
 
 // بذر البيانات الأولية عند أول تشغيل
 if (!db.prepare('select 1 from site_settings').get()) {
-  const { demo } = await import('../src/lib/demo.js')
-  const { site } = await import('../src/config/site.js')
+  const { demo } = await import('../src/profiles/rakan/demo.js')
+  const { site } = await import('../src/profiles/rakan/site.js')
   const id = () => crypto.randomUUID()
   db.prepare('insert into site_settings (id,stats,bio_text,welcome,phone,email,address,social) values (1,?,?,?,?,?,?,?)')
     .run(JSON.stringify(demo.settings.stats), demo.settings.bio_text, site.welcome, site.phone, site.email, site.address, JSON.stringify(site.social))
