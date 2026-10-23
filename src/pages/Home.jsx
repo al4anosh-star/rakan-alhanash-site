@@ -1,14 +1,17 @@
 import { Link } from 'react-router-dom'
 import { Icon } from '../components/ui/icons'
 import { site } from '../config/site'
-import { getNews, getSettings, getRequestStats } from '../lib/api'
-import { fmtNum, asset } from '../lib/utils'
+import { getNews, getSettings, getRequestStats, getList } from '../lib/api'
+import { fmtNum, fmtDate, asset } from '../lib/utils'
 import { Button, SectionTitle, NewsCard, Loader, useAsync } from '../components/ui'
 
 export default function Home() {
   // أحدث 3 أخبار مصوّرة (أخبار الوجبات بدون صور تبقى في صفحة الأخبار)
   const news = useAsync(() => getNews({ limit: 12 }).then((r) => r.filter((n) => n.image_url).slice(0, 3)))
   const settings = useAsync(getSettings)
+  const completed = useAsync(() => getList('completed_items'))
+  const lastBatch = (completed.data || []).reduce((m, x) => (x.done_date > m ? x.done_date : m), '')
+  const lastCount = (completed.data || []).filter((x) => x.done_date === lastBatch).length
   const live = useAsync(getRequestStats)
   const liveStats = live.data && Number(live.data.total) > 0
     ? [{ label: 'طلب مواطن مستلم', value: Number(live.data.total) }, { label: 'طلب منجز', value: Number(live.data.done) }] : []
@@ -70,6 +73,19 @@ export default function Home() {
         )}
         <div className="text-center mt-10"><Button as={Link} to="/news" variant="navy">جميع الأخبار</Button></div>
       </section>
+
+      {lastBatch && (
+        <section className="container-x pb-16">
+          <div className="bg-navy-900 text-white rounded-2xl p-6 md:p-10 flex flex-wrap items-center justify-between gap-6 border-s-8 border-gold-500">
+            <div>
+              <p className="text-gold-300 font-bold text-sm">المعاملات المنجزة</p>
+              <h2 className="text-2xl md:text-3xl font-extrabold mt-1">آخر وجبة معلنة: {fmtDate(lastBatch)}</h2>
+              <p className="text-white/75 mt-2">{fmtNum(lastCount)} بنداً منجزاً في هذه الوجبة، مع إمكانية البحث بالجهة أو نوع المعاملة.</p>
+            </div>
+            <Button as={Link} to="/completed">عرض المعاملات المنجزة</Button>
+          </div>
+        </section>
+      )}
 
       <section className="bg-gold-500/10 py-14">
         <div className="container-x text-center">
