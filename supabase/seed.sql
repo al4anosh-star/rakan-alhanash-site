@@ -151,6 +151,14 @@ insert into bio_timeline (year,title,description,kind,sort_order) values ('1989'
 insert into bio_timeline (year,title,description,kind,sort_order) values ('النشأة','التربية في كنف الجد','تربّى في كنف جدّه الشيخ غازي الحنش، فتشرّب قيم المشيخة وخدمة المجتمع.','birth',1);
 insert into bio_timeline (year,title,description,kind,sort_order) values ('2025','عضو مجلس النواب العراقي عن محافظة نينوى','فاز عن قائمة «نينوى لأهلها» بـ 13,804 صوتاً.','position',2);
 insert into bio_timeline (year,title,description,kind,sort_order) values ('الدورة النيابية الحالية','عضو لجنة النزاهة النيابية','اختاره مجلس النواب عضواً في لجنة النزاهة النيابية.','position',3);
+insert into completed_items (done_date,ministry,title) values ('2026-10-23','جهات متعددة','طلبات منجزة متنوعة — ملف مجمّع (45 صفحة موثّقة)');
+insert into completed_items (done_date,ministry,title) values ('2026-10-23','محافظة نينوى','كتب ومعاملات منجزة لدى محافظة نينوى (9 صفحة موثّقة)');
+insert into completed_items (done_date,ministry,title) values ('2026-10-23','وزارة الصحة','كتب ومعاملات منجزة لدى وزارة الصحة (85 صفحة موثّقة)');
+insert into completed_items (done_date,ministry,title) values ('2026-10-23','وزارة الصحة','كتب ومعاملات منجزة لدى مديرية صحة نينوى (3 صفحة موثّقة)');
+insert into completed_items (done_date,ministry,title) values ('2026-10-23','وزارة التربية','كتب ومعاملات منجزة لدى وزارة التربية (22 صفحة موثّقة)');
+insert into completed_items (done_date,ministry,title) values ('2026-10-23','وزارة التربية','كتب ومعاملات منجزة لدى مديرية تربية نينوى (4 صفحة موثّقة)');
+insert into completed_items (done_date,ministry,title) values ('2026-10-23','وزارة الداخلية','كتب ومعاملات منجزة لدى مديرية الأحوال والجوازات (10 صفحة موثّقة)');
+insert into completed_items (done_date,ministry,title) values ('2026-10-23','وزارة النفط','كتب ومعاملات منجزة لدى وزارة النفط (6 صفحة موثّقة)');
 insert into completed_items (done_date,ministry,title) values ('2026-10-11','وزارات متعددة','وجبة جديدة من الموافقات والطلبات المنجزة');
 insert into completed_items (done_date,ministry,title) values ('2026-08-01','وزارة العمل والشؤون الاجتماعية','شمول جديد لذوي الاحتياجات الخاصة');
 insert into completed_items (done_date,ministry,title) values ('2026-08-01','وزارة العمل والشؤون الاجتماعية','تسجيل المعين المتفرغ');
