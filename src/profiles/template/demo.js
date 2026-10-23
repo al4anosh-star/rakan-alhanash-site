@@ -33,6 +33,18 @@ export const demo = {
     { id: 't3', year: '20XX', title: 'محطة مهنية', description: 'نص تجريبي.', kind: 'position' },
     { id: 't4', year: '20XX', title: 'المنصب الحالي', description: 'نص تجريبي.', kind: 'position' },
   ],
+  pledges: [
+    { id: 'p1', title: 'تحسين الخدمات الأساسية (مثال)', description: 'نص تجريبي يصف التعهد المعلن.', status: 'قيد العمل', note: 'متابعة مع الجهات المعنية' },
+    { id: 'p2', title: 'دعم التعليم (مثال)', description: 'نص تجريبي يصف التعهد المعلن.', status: 'تحقق', note: '' },
+    { id: 'p3', title: 'فرص عمل للشباب (مثال)', description: 'نص تجريبي يصف التعهد المعلن.', status: 'لم يبدأ', note: '' },
+  ],
+  events: [
+    { id: 'e1', title: 'لقاء مفتوح مع المواطنين (مثال)', date: '2026-11-05', place: 'مقر المكتب', note: 'نص تجريبي' },
+    { id: 'e2', title: 'ورشة حوارية (مثال)', date: '2026-11-19', place: 'قاعة المؤتمرات', note: 'نص تجريبي' },
+  ],
+  clarifications: [
+    { id: 'c1', title: 'توضيح بشأن معلومة متداولة (مثال)', claim: 'نص تجريبي للمعلومة المتداولة.', answer: 'نص تجريبي للتوضيح الرسمي.', date: '2026-10-10' },
+  ],
   completed: [
     { id: 'c1', done_date: '2026-10-05', ministry: 'جهة حكومية (مثال)', title: 'معاملة منجزة (مثال)', citizen_name: null, ref_no: null },
     { id: 'c2', done_date: '2026-10-05', ministry: 'جهة حكومية (مثال)', title: 'موافقة صادرة (مثال)', citizen_name: null, ref_no: null },

@@ -25,3 +25,10 @@ h1, h2, h3, h4 { font-family: var(--font-display); }
 :focus-visible { outline: 3px solid var(--color-gold-500); outline-offset: 2px; border-radius: 4px; }
 @media (prefers-reduced-motion: reduce) { *, ::before, ::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; } }
 img { content-visibility: auto; }
+
+@media print {
+  .no-print { display: none !important; }
+  body { background: #fff !important; }
+  .print-page { padding: 0 !important; }
+  a { color: inherit !important; text-decoration: none !important; }
+}

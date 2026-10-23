@@ -12,6 +12,22 @@ export const site = {
   nameImageWhite: '/img/brand/name-white.png',
   committeeLogo: '/img/brand/committee.png',    // رابط الشعار
   features: { parliament: true },
+  // الركن الإعلامي
+  mediaFacts: [
+    ['الاسم الرسمي', 'راكان الشيخ صباح غازي الحنش'],
+    ['الصفة', 'عضو مجلس النواب العراقي'],
+    ['الدائرة', 'محافظة نينوى'],
+    ['القائمة', 'نينوى لأهلها (انتخابات 2025)'],
+    ['عدد الأصوات', '13,804 صوتاً'],
+    ['اللجان', 'عضو لجنة النزاهة النيابية'],
+    ['مكان الولادة', 'الموصل (حي الوحدة)'],
+  ],
+  mediaKit: [
+    { label: 'الصورة الرسمية', hint: 'صورة شخصية رسمية (JPG)', file: '/img/rakan.jpg' },
+    { label: 'شعار المكتب', hint: 'الشعار الذهبي بخلفية شفافة (PNG)', file: '/img/brand/emblem.png' },
+    { label: 'الاسم المزخرف (أزرق)', hint: 'للخلفيات الفاتحة (PNG شفاف)', file: '/img/brand/name-blue.png' },
+    { label: 'الاسم المزخرف (أبيض)', hint: 'للخلفيات الداكنة (PNG شفاف)', file: '/img/brand/name-white.png', dark: true },
+  ],
   // بيانات التواصل المعروضة حالياً هي بيانات المصمم. للإرجاع إلى بيانات المكتب الرسمية:
   //   phone: '07779006161' | email: 'rakanalhansh313@gmail.com' | whatsapp: '9647827444008'
   phone: '07827444008',

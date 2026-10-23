@@ -9,6 +9,9 @@ const Gallery = lazy(() => import('./pages/Gallery'))
 const Achievements = lazy(() => import('./pages/Achievements'))
 const Requests = lazy(() => import('./pages/Requests'))
 const Parliament = lazy(() => import('./pages/Parliament'))
+const Media = lazy(() => import('./pages/Media'))
+const Report = lazy(() => import('./pages/Report'))
+const Updates = lazy(() => import('./pages/Updates'))
 const Completed = lazy(() => import('./pages/Completed'))
 const Contact = lazy(() => import('./pages/Contact'))
 const News = lazy(() => import('./pages/News').then((m) => ({ default: m.News })))
@@ -35,6 +38,11 @@ export default function App() {
           <Route path="achievements" element={<Achievements />} />
           <Route path="requests" element={<Requests />} />
           {site.features?.parliament && <Route path="parliament" element={<Parliament />} />}
+          <Route path="media" element={<Media />} />
+          <Route path="report" element={<Report />} />
+          <Route path="pledges" element={<Updates kind="pledges" />} />
+          <Route path="events" element={<Updates kind="events" />} />
+          <Route path="clarifications" element={<Updates kind="clarifications" />} />
           <Route path="completed" element={<Completed />} />
           <Route path="contact" element={<Contact />} />
         </Route>

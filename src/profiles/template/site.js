@@ -12,6 +12,16 @@ export const site = {
   nameImageWhite: '',
   committeeLogo: '',
   features: { parliament: false },
+  mediaFacts: [
+    ['الاسم', 'محمد سعدون الحنوش'],
+    ['الصفة', 'نموذج موقع شخصية عامة'],
+    ['الدائرة', 'مثال: المحافظة / الدائرة'],
+    ['اللجان', 'مثال: اللجنة المعنية'],
+  ],
+  mediaKit: [
+    { label: 'الشعار', hint: 'شعار تجريبي (SVG)', file: '/logo.svg' },
+    { label: 'صورة تجريبية', hint: 'صورة للعرض (JPG)', file: '/img/sample-1.jpg' },
+  ],
   demoBanner: 'نموذج للعرض — جميع المحتويات والأرقام تجريبية',
   phone: '07827444008',
   email: 'info@alsaadon.com',

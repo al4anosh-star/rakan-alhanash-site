@@ -3,12 +3,17 @@ import { Link, NavLink, Outlet, useLocation } from 'react-router-dom'
 import { site } from '../../config/site'
 import { SocialIcon, socialLabels, Icon } from '../ui/icons'
 import { asset } from '../../lib/utils'
+import { demo } from '../../lib/demo'
 
-const allLinks = [
+const has = (k) => Boolean(demo[k]?.length)
+const main = [
   ['/', 'الرئيسية'], ['/biography', 'السيرة الذاتية'], ['/parliament', 'العمل النيابي'], ['/news', 'الأخبار'],
-  ['/gallery', 'المعرض'], ['/achievements', 'الإنجازات'], ['/requests', 'طلبات المواطنين'], ['/completed', 'المعاملات المنجزة'], ['/contact', 'تواصل معنا'],
-]
-const links = allLinks.filter(([to]) => to !== '/parliament' || site.features?.parliament)
+  ['/requests', 'طلبات المواطنين'], ['/completed', 'المعاملات المنجزة'], ['/contact', 'تواصل معنا'],
+].filter(([to]) => to !== '/parliament' || site.features?.parliament)
+const more = [
+  ['/gallery', 'المعرض'], ['/achievements', 'الإنجازات'], ['/media', 'الركن الإعلامي'], ['/report', 'تقرير الحصاد'],
+  ['/pledges', 'التعهدات'], ['/events', 'المواعيد واللقاءات'], ['/clarifications', 'توضيحات'],
+].filter(([to]) => ({ '/pledges': has('pledges'), '/events': has('events'), '/clarifications': has('clarifications') }[to] ?? true))
 
 function Brand({ light }) {
   const img = light ? site.nameImageWhite : site.nameImage
@@ -26,27 +31,44 @@ function Brand({ light }) {
 
 export default function Layout() {
   const [open, setOpen] = useState(false)
+  const [moreOpen, setMoreOpen] = useState(false)
   const { pathname } = useLocation()
-  useEffect(() => { setOpen(false); window.scrollTo(0, 0) }, [pathname])
+  useEffect(() => { setOpen(false); setMoreOpen(false); window.scrollTo(0, 0) }, [pathname])
+  useEffect(() => {
+    if (!moreOpen) return
+    const close = (e) => { if (!e.target.closest('[data-more]')) setMoreOpen(false) }
+    document.addEventListener('click', close)
+    return () => document.removeEventListener('click', close)
+  }, [moreOpen])
 
   return (
     <div className="min-h-screen flex flex-col">
-      {site.demoBanner && <div className="bg-gold-500 text-navy-950 text-center text-sm font-bold py-1.5 px-3">{site.demoBanner}</div>}
+      {site.demoBanner && <div className="no-print bg-gold-500 text-navy-950 text-center text-sm font-bold py-1.5 px-3">{site.demoBanner}</div>}
       <a href="#main" className="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:right-2 focus:z-[200] focus:bg-gold-500 focus:text-navy-950 focus:px-4 focus:py-2 focus:rounded">تخطّي إلى المحتوى</a>
-      <header className="sticky top-0 z-50 bg-white/95 backdrop-blur border-b border-black/5 shadow-sm">
+      <header className="no-print sticky top-0 z-50 bg-white/95 backdrop-blur border-b border-black/5 shadow-sm">
         <div className="container-x flex items-center justify-between h-16">
           <Brand />
           <nav className="hidden xl:flex items-center gap-1">
-            {links.map(([to, label]) => (
+            {main.map(([to, label]) => (
               <NavLink key={to} to={to} end={to === '/'} className={({ isActive }) =>
                 `px-2.5 py-2 rounded-md text-sm font-bold whitespace-nowrap transition ${isActive ? 'text-gold-600 bg-gold-500/10' : 'text-navy-900 hover:text-gold-600'}`}>{label}</NavLink>
             ))}
+            <div className="relative" data-more>
+              <button onClick={() => setMoreOpen(!moreOpen)} aria-expanded={moreOpen} className="px-2.5 py-2 rounded-md text-sm font-bold text-navy-900 hover:text-gold-600 whitespace-nowrap">المزيد ▾</button>
+              {moreOpen && (
+                <div className="absolute end-0 mt-2 w-56 bg-white rounded-xl shadow-xl border border-black/5 py-2 fade-in">
+                  {more.map(([to, label]) => (
+                    <NavLink key={to} to={to} className={({ isActive }) => `block px-4 py-2.5 text-sm font-bold ${isActive ? 'text-gold-600 bg-gold-500/10' : 'text-navy-900 hover:bg-slate-50'}`}>{label}</NavLink>
+                  ))}
+                </div>
+              )}
+            </div>
           </nav>
           <button className="xl:hidden size-10 text-2xl text-navy-900" onClick={() => setOpen(!open)} aria-label="القائمة"><Icon name={open ? 'close' : 'menu'} className="size-6 mx-auto" /></button>
         </div>
         {open && (
           <nav className="xl:hidden border-t bg-white fade-in">
-            {links.map(([to, label]) => (
+            {[...main, ...more].map(([to, label]) => (
               <NavLink key={to} to={to} end={to === '/'} className={({ isActive }) =>
                 `block px-6 py-3.5 border-b border-black/5 font-bold ${isActive ? 'text-gold-600 bg-gold-500/10' : 'text-navy-900'}`}>{label}</NavLink>
             ))}
@@ -55,9 +77,9 @@ export default function Layout() {
       </header>
 
       <main id="main" className="flex-1"><Outlet /></main>
-      <a href={site.social.whatsapp} target="_blank" rel="noreferrer" aria-label="راسلنا على واتساب" className="fixed bottom-5 left-5 z-40 size-14 rounded-full bg-[#25D366] text-white shadow-lg flex items-center justify-center hover:scale-105 transition"><SocialIcon name="whatsapp" className="size-8" /></a>
+      <a href={site.social.whatsapp} target="_blank" rel="noreferrer" aria-label="راسلنا على واتساب" className="no-print fixed bottom-5 left-5 z-40 size-14 rounded-full bg-[#25D366] text-white shadow-lg flex items-center justify-center hover:scale-105 transition"><SocialIcon name="whatsapp" className="size-8" /></a>
 
-      <footer className="bg-navy-950 text-white/80 mt-16">
+      <footer className="no-print bg-navy-950 text-white/80 mt-16">
         <div className="container-x py-12 grid gap-8 md:grid-cols-3">
           <div>
             <Brand light />
@@ -67,7 +89,7 @@ export default function Layout() {
           <div>
             <h4 className="font-bold text-white mb-3">روابط سريعة</h4>
             <ul className="space-y-2 text-sm">
-              {links.slice(1).map(([to, l]) => <li key={to}><Link to={to} className="hover:text-gold-300">{l}</Link></li>)}
+              {[...main.slice(1), ...more].map(([to, l]) => <li key={to}><Link to={to} className="hover:text-gold-300">{l}</Link></li>)}
             </ul>
           </div>
           <div>
