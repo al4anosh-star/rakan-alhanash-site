@@ -7,7 +7,7 @@ import path from 'node:path'
 const ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), '..')
 const DRY = process.argv.includes('--dry')
 const PROFILE = process.env.IG_PROFILE || 'rakan__alhanash'
-const UA = 'Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)'
+const UA = 'rakan-site-news-fetcher/1.0 (personal project)'
 const AUTO = path.join(ROOT, 'src/data/news-auto.js')
 const IMG_DIR = path.join(ROOT, 'public/img/news')
 const SIG = '\n\nالمكتب الإعلامي للنائب راكان الشيخ صباح غازي الحنش — عضو لجنة النزاهة.'
@@ -38,7 +38,7 @@ for (const m of html.matchAll(/\{"node":\{"__typename":"XIGPolaris/g)) {
   } catch {}
 }
 console.log('posts parsed:', posts.length)
-if (!posts.length) { console.error(`تعذّر جلب المنشورات (HTTP ${res.status}). انستغرام يحجب خوادم GitHub؛ شغّل السكربت من جهازك: npm run news`); process.exit(1) }
+if (!posts.length) { console.error(`تعذّر جلب المنشورات (HTTP ${res.status}). انستغرام لا يقدّم بيانات المنشورات لعميل معرَّف بصدق. ألصق نص المنشور أو رابطه أو صوره وسأضيفه يدوياً، أو استخدم تصدير بيانات الحساب الرسمي.`); process.exit(1) }
 
 const fresh = posts.filter((p) => !known.has(String(p.pk)))
 console.log('new posts:', fresh.length)
