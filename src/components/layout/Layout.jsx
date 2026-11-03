@@ -12,8 +12,8 @@ const main = [
 ].filter(([to]) => to !== '/parliament' || site.features?.parliament)
 const more = [
   ['/gallery', 'المعرض'], ['/achievements', 'الإنجازات'], ['/media', 'الركن الإعلامي'], ['/report', 'تقرير الحصاد'],
-  ['/pledges', 'التعهدات'], ['/events', 'المواعيد واللقاءات'], ['/clarifications', 'توضيحات'],
-].filter(([to]) => ({ '/pledges': has('pledges'), '/events': has('events'), '/clarifications': has('clarifications') }[to] ?? true))
+  ['/archive', 'أرشيف الأخبار'], ['/lookup', 'استعلام عن معاملة'], ['/faq', 'الأسئلة الشائعة'], ['/pledges', 'التعهدات'], ['/events', 'المواعيد واللقاءات'], ['/clarifications', 'توضيحات'],
+].filter(([to]) => ({ '/lookup': Boolean(site.features?.lookup), '/pledges': has('pledges'), '/events': has('events'), '/clarifications': has('clarifications') }[to] ?? true))
 
 function Brand({ light }) {
   const img = light ? site.nameImageWhite : site.nameImage

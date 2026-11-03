@@ -5,16 +5,20 @@ import { asset, fmtDate, fmtNum } from '../lib/utils'
 import { Button, Loader, Empty, useAsync } from '../components/ui'
 
 const monthKey = (d) => (d || '').slice(0, 7)
-const monthLabel = (k) => new Date(`${k}-01T00:00:00`).toLocaleDateString('ar-IQ', { month: 'long', year: 'numeric' })
+const quarterKey = (d) => (d ? `${d.slice(0, 4)}-Q${Math.ceil(Number(d.slice(5, 7)) / 3)}` : '')
+const keyOf = (mode, d) => (mode === 'q' ? quarterKey(d) : monthKey(d))
+const QN = ['الأول', 'الثاني', 'الثالث', 'الرابع']
+const monthLabel = (k) => k.includes('-Q') ? `الربع ${QN[Number(k.slice(-1)) - 1]} ${k.slice(0, 4)}` : new Date(`${k}-01T00:00:00`).toLocaleDateString('ar-IQ', { month: 'long', year: 'numeric' })
 
 export default function Report() {
   const news = useAsync(() => getNews())
   const done = useAsync(() => getList('completed_items'))
-  const months = useMemo(() => [...new Set((news.data || []).map((n) => monthKey(n.published_at)).filter(Boolean))].sort().reverse(), [news.data])
+  const [mode, setMode] = useState('m')
+  const months = useMemo(() => [...new Set((news.data || []).map((n) => keyOf(mode, n.published_at)).filter(Boolean))].sort().reverse(), [news.data, mode])
   const [sel, setSel] = useState('')
-  const month = sel || months[0]
-  const items = (news.data || []).filter((n) => monthKey(n.published_at) === month)
-  const batches = new Set((done.data || []).filter((x) => monthKey(x.done_date) === month).map((x) => x.done_date)).size
+  const month = months.includes(sel) ? sel : months[0]
+  const items = (news.data || []).filter((n) => keyOf(mode, n.published_at) === month)
+  const batches = new Set((done.data || []).filter((x) => keyOf(mode, x.done_date) === month).map((x) => x.done_date)).size
   const count = (cats) => items.filter((n) => cats.includes(n.category)).length
   const groups = items.reduce((a, n) => ((a[n.category] ||= []).push(n), a), {})
 
@@ -26,6 +30,7 @@ export default function Report() {
       <div className="no-print flex flex-wrap items-center justify-between gap-3 mb-8">
         <h1 className="text-2xl font-extrabold text-navy-900">تقرير الحصاد الشهري</h1>
         <div className="flex gap-3 items-center">
+          <select className="input !w-auto" value={mode} onChange={(e) => { setMode(e.target.value); setSel('') }} aria-label="الفترة"><option value="m">شهري</option><option value="q">فصلي</option></select>
           <select className="input !w-auto" value={month} onChange={(e) => setSel(e.target.value)} aria-label="الشهر">
             {months.map((m) => <option key={m} value={m}>{monthLabel(m)}</option>)}
           </select>
@@ -39,7 +44,7 @@ export default function Report() {
           <div>
             <h2 className="text-xl md:text-2xl font-extrabold">{site.fullName}</h2>
             <p className="text-gold-300">{site.title}</p>
-            <p className="text-white/80 mt-1">تقرير الحصاد الشهري — {monthLabel(month)}</p>
+            <p className="text-white/80 mt-1">تقرير الحصاد {mode === 'q' ? 'الفصلي' : 'الشهري'} — {monthLabel(month)}</p>
           </div>
         </header>
         <div className="p-6 md:p-8 space-y-8">

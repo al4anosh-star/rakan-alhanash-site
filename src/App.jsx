@@ -12,6 +12,9 @@ const Parliament = lazy(() => import('./pages/Parliament'))
 const Media = lazy(() => import('./pages/Media'))
 const Report = lazy(() => import('./pages/Report'))
 const Updates = lazy(() => import('./pages/Updates'))
+const Faq = lazy(() => import('./pages/Faq'))
+const Archive = lazy(() => import('./pages/Archive'))
+const Lookup = lazy(() => import('./pages/Lookup'))
 const Completed = lazy(() => import('./pages/Completed'))
 const Contact = lazy(() => import('./pages/Contact'))
 const News = lazy(() => import('./pages/News').then((m) => ({ default: m.News })))
@@ -43,6 +46,9 @@ export default function App() {
           <Route path="pledges" element={<Updates kind="pledges" />} />
           <Route path="events" element={<Updates kind="events" />} />
           <Route path="clarifications" element={<Updates kind="clarifications" />} />
+          <Route path="faq" element={<Faq />} />
+          <Route path="archive" element={<Archive />} />
+          <Route path="lookup" element={<Lookup />} />
           <Route path="completed" element={<Completed />} />
           <Route path="contact" element={<Contact />} />
         </Route>

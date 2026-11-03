@@ -11,7 +11,9 @@
     "start": "npm run build && node server/index.js",
     "server": "node server/index.js",
     "news": "node scripts/fetch-news.mjs",
-    "status": "node scripts/set-status.mjs"
+    "status": "node scripts/set-status.mjs",
+    "codes": "node scripts/make-codes.mjs",
+    "add-news": "node scripts/add-news.mjs"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.117.3",

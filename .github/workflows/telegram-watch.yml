@@ -1,0 +1,25 @@
+name: Watch office Telegram channel
+# يفحص القناة العامة كل 6 ساعات، وعند ظهور منشور جديد يفتح Issue (يصلك إشعار GitHub/إيميل).
+on:
+  schedule: [{ cron: '0 */6 * * *' }]
+  workflow_dispatch:
+permissions: { contents: write, issues: write }
+jobs:
+  watch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - name: Check channel
+        env: { GH_TOKEN: '${{ secrets.GITHUB_TOKEN }}' }
+        run: |
+          LAST=$(cat scripts/tg-last.txt 2>/dev/null || echo 0)
+          HTML=$(curl -sL --max-time 30 -A "rakan-site-watcher/1.0 (personal project)" https://t.me/s/rakanalhanash1)
+          NOW=$(echo "$HTML" | grep -o 'data-post="rakanalhanash1/[0-9]*"' | grep -o '[0-9]*' | sort -n | tail -1)
+          echo "last=$LAST now=$NOW"
+          [ -z "$NOW" ] && { echo "تعذّر قراءة القناة"; exit 0; }
+          if [ "$NOW" -gt "$LAST" ]; then
+            gh issue create --title "منشور جديد في قناة المكتب على تلغرام (#$NOW)" --body "ظهر منشور جديد في https://t.me/rakanalhanash1 — راجعه وأرسل نصّه ليُضاف للموقع.\n\n(آخر رقم مُعالَج: $LAST)" || true
+            echo "$NOW" > scripts/tg-last.txt
+            git config user.name "watcher-bot"; git config user.email "watcher-bot@users.noreply.github.com"
+            git add scripts/tg-last.txt && git commit -m "tg-watch: last post $NOW" && git push
+          fi

@@ -17,6 +17,11 @@ export default function Contact() {
             </div>
           ))}
         </div>
+        <div className="md:col-span-2 -mt-2">
+          <a href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(site.address)}`} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-lg border border-navy-900/20 text-navy-900 hover:bg-navy-900/5 px-5 py-2.5 font-bold text-sm transition">
+            <Icon name="pin" className="size-5" />اتجاهات الوصول إلى المكتب على الخريطة
+          </a>
+        </div>
         <div className="bg-navy-900 rounded-xl p-6 text-white self-start">
           <h3 className="font-extrabold text-lg mb-4">الحسابات الرسمية</h3>
           <div className="grid grid-cols-2 gap-3">
